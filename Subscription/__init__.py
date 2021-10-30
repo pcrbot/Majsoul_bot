@@ -10,6 +10,8 @@ sv = Service("雀魂对局订阅")
 @sv.on_prefix("雀魂订阅")
 async def orderInfo(bot, ev: CQEvent):
     nickname = ev.message.extract_plain_text()
+    if len(nickname) > 15:
+        await bot.finish(ev, "昵称长度超过雀魂最大限制")
     IDdata = getID(nickname)
     message = ""
     if IDdata == -404:
@@ -38,6 +40,8 @@ async def orderInfo(bot, ev: CQEvent):
 @sv.on_prefix(("关闭雀魂订阅","取消雀魂订阅"))
 async def cancelOrder(bot,ev:CQEvent):
     nickname = ev.message.extract_plain_text()
+    if len(nickname) > 15:
+        await bot.finish(ev, "昵称长度超过雀魂最大限制")
     gid = ev["group_id"]
     message = ""
     record = localLoad()
@@ -65,6 +69,8 @@ async def cancelOrder(bot,ev:CQEvent):
 @sv.on_prefix("开启雀魂订阅")
 async def openOrder(bot,ev:CQEvent):
     nickname = ev.message.extract_plain_text()
+    if len(nickname) > 15:
+        await bot.finish(ev, "昵称长度超过雀魂最大限制")
     gid = ev["group_id"]
     record = localLoad()
     flag = False
@@ -89,7 +95,7 @@ async def openOrder(bot,ev:CQEvent):
         else:
             await bot.send(ev,"没有找到该昵称在本群的订阅记录哦，请检查后重试\n")
 
-@sv.scheduled_job('interval', minutes=3)
+@sv.scheduled_job('interval', minutes=10)
 async def record_scheduled():
     bot = get_bot()
     record = localLoad()
@@ -133,6 +139,8 @@ async def orderSituation(bot,ev):
 @sv.on_prefix("删除雀魂订阅")
 async def delInfo(bot,ev):
     nickname = ev.message.extract_plain_text()
+    if len(nickname) > 15:
+        await bot.finish(ev, "昵称长度超过雀魂最大限制")
     gid = ev["group_id"]
     record = localLoad()
     flag = False
@@ -159,6 +167,8 @@ async def delInfo(bot,ev):
 @sv.on_prefix("三麻订阅")
 async def orderTriInfo(bot, ev: CQEvent):
     nickname = ev.message.extract_plain_text()
+    if len(nickname) > 15:
+        await bot.finish(ev, "昵称长度超过雀魂最大限制")
     IDdata = getTriID(nickname)
     message = ""
     if IDdata == -1:
@@ -185,6 +195,8 @@ async def orderTriInfo(bot, ev: CQEvent):
 @sv.on_prefix(("关闭三麻订阅","取消三麻订阅"))
 async def cancelTriOrder(bot,ev:CQEvent):
     nickname = ev.message.extract_plain_text()
+    if len(nickname) > 15:
+        await bot.finish(ev, "昵称长度超过雀魂最大限制")
     gid = ev["group_id"]
     message = ""
     record = localTriLoad()
@@ -210,6 +222,8 @@ async def cancelTriOrder(bot,ev:CQEvent):
 @sv.on_prefix("开启三麻订阅")
 async def openTriOrder(bot,ev:CQEvent):
     nickname = ev.message.extract_plain_text()
+    if len(nickname) > 15:
+        await bot.finish(ev, "昵称长度超过雀魂最大限制")
     gid = ev["group_id"]
     record = localTriLoad()
     flag = False
@@ -232,7 +246,7 @@ async def openTriOrder(bot,ev:CQEvent):
         else:
             await bot.send(ev,"没有找到该昵称在本群的订阅记录哦，请检查后重试\n")
 
-@sv.scheduled_job('interval', minutes=3)
+@sv.scheduled_job('interval', minutes=10)
 async def Trirecord_scheduled():
     bot = get_bot()
     record = localTriLoad()
@@ -276,6 +290,8 @@ async def orderSituation(bot,ev):
 @sv.on_prefix("删除三麻订阅")
 async def delTriInfo(bot,ev):
     nickname = ev.message.extract_plain_text()
+    if len(nickname) > 15:
+        await bot.finish(ev, "昵称长度超过雀魂最大限制")
     gid = ev["group_id"]
     record = localTriLoad()
     flag = False
